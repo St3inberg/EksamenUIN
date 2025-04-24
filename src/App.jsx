@@ -1,6 +1,6 @@
 
 import './App.css'
-import { Router } from 'react-router-dom'
+import { Router, Route } from 'react-router-dom'
 import Layout from '/conponents/Layout'
 
 
