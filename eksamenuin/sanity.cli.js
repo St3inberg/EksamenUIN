@@ -4,7 +4,7 @@ export default defineCliConfig({
   api: {
     projectId: '7sm8nni0',
     dataset: 'production',
-    token: 'skIXTJM6pGWT7wkSGGfaKTnU1gzDX4NMvJR7TsHIZ0e7c93cwyLlA04SjEAYp0rvf1v2v2A31gnOjbrLuo7ag7I3vCM6010NoRFNqqZS0GTROdNYjOYoM1AS3zwBtn0KyNGxeUsBFEcwOPsyXj7y3NQ7GvXwZ4kdlPHryajlAyTKDuv4ubtq',
+    
     useCdn: false,
   },
   /**
