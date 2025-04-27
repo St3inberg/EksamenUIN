@@ -1,1 +1,6 @@
-export const schemaTypes = []
+import { events } from "./events";
+
+
+export const schemaTypes = [
+    events
+]
