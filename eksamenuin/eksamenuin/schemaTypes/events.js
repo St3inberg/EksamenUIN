@@ -9,6 +9,15 @@ export const events = {
       { name: 'description', type: 'text', title: 'Description' },
       { name: 'ticketLink', type: 'url', title: 'Ticket Link' },
       { name: 'image', type: 'image', title: 'Image'},
+      { name: 'imageAlt', type: 'string', title: 'Image Alt Text' },
+      { name: 'category', type: 'string', title: 'Category' },
+      
+      {name: 'user',
+      type: 'reference',
+      to: [{type: 'user'}],
+      }
+
+      
     ]
   }
   
