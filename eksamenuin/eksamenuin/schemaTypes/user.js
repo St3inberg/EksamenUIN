@@ -17,6 +17,11 @@ export const user = {
         name: 'password',
         type: 'string',
         title: 'Password'
+      },
+      {
+        name:'country',
+        type: 'string',
+        title: 'Country'
       }
     ]
   }
