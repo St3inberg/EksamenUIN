@@ -1,12 +1,14 @@
 
 import './App.css'
 import { Router, Route } from 'react-router-dom';
-import Layout from '/conponents/Layout';
-import Home from './components/Home';
+import Layout from './components/layout';
+import Home from './components/home';
 import EventPages from './components/EventPages'
+import ArktikkeKort from './components/ArtikkelKort'
 
 
 function App() {
+
  
 
   return (
