@@ -13,11 +13,7 @@ function App() {
       <Layout>
         <Route path={"/"}  element={<Home/>}></Route>
         <Route path={"/event/:id"}  element={<EventPages/>}></Route>
-<<<<<<< Updated upstream
-        
 
-=======
->>>>>>> Stashed changes
 
       </Layout>
     </Router>
