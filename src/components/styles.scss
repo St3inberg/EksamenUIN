@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+$dark-purple: #300365;
+$light-purple: #7c43bd;
+$grey-bg:     #f5f5f5;
+$white:       #fff;
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: $grey-bg;
+  color: #333;
+}
+
+
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $dark-purple;
+  padding: 1rem 2rem;
+
+  .logo {
+    margin: 0;
+    font-size: 1.5rem;
+    color: $white;
+    text-decoration: none;  
+    cursor: pointer;         
+  }
+
+  
+  #nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    
+    
+
+    a {
+      display: inline-block;
+      color: $white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      transition: background 0.2s, transform 0.1s;
+
+      &:hover {
+        background: $light-purple;
+        transform: translateY(-2px);
+      }
+    }
+  }
+}
+
+
+main {
+  padding: 2rem;
+}
+
+.home,
+.profilside {
+  background: $white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.ArticleCard {
+  background: $grey-bg;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 100%;
+  margin: 6rem 2rem 0rem 0rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    img {
+    display: block;
+    max-width: 200px;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+  }
+}
+#flex-container{
+  display: flex;
+  justify-content: center;
+}
+
+
+.EventPages {
+  img {
+    display: block;
+    max-width: 200px;
+    margin: 0 auto 1rem;
+    border-radius: 8px;
+  }
+}
+
+
+.EventPages {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.EventPages__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.EventPages__image {
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.EventPages__info {
+  flex: 1;
+}
+
+.EventPages__name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.EventPages__bio {
+  margin-top: 0.5rem;
+}
+
+.EventPages__interesser ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.arbeidslogg-container {
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+.arbeidslogg-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #9ca3af;
+}
+
+.arbeidslogg-table th,
+.arbeidslogg-table td {
+  padding: 0.75rem;
+  border: 1px solid #9ca3af;
+  text-align: left;
+}
+
+.arbeidslogg-table thead {
+  background-color: #f3f4f6;
+}
+
+.arbeidslogg-table tbody tr:hover {
+  background-color: #f9fafb;
+}
