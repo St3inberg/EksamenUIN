@@ -1,3 +1,15 @@
-export default function Layout () {
-    return <h1>Lol!</h1>
+import Nav from "./Nav";
+
+
+export default function Layout ({children}) {
+    return(
+        <>
+        <header>
+            <Nav/>
+        </header>
+        <main>
+            {children}
+        </main>
+        </>
+    )
 }
