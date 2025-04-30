@@ -3,7 +3,8 @@ export default function Home ({artikkel}) {
 }
 
 import ArticleCard from "./ArtikkelKort";
-import Artikler from "./ArtikkelKort";
+
+// import Artikler from "./ArtikkelKort";
 // import Loggkort from './Loggkort';
 
 
