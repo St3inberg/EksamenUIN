@@ -1,10 +1,8 @@
 import React from "react";
 import Styles from './ArtistCard.scss'
 
-function ArtistCard({id,name,image}){
+export default function ArtistCard(){
     return(
-        <div className={Styles.card}>
-
-        </div>
+        <div></div>
     )
 }
