@@ -1,0 +1,42 @@
+.card {
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); /* shadow-md */
+    border-radius: 0.5rem; /* rounded-lg */
+    padding: 1rem; 
+    text-align: center;
+    transition-property: box-shadow;
+    transition-duration: 300ms;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+  }
+  
+  .image {
+    width: 6rem; 
+    height: 6rem; 
+    border-radius: 9999px; 
+    object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.75rem; 
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); 
+  }
+  
+  
+  @media (min-width: 768px) {
+    .image {
+      width: 8rem; 
+      height: 8rem; 
+    }
+  }
+  
+  .name {
+    font-size: 1rem; 
+    font-weight: 600; 
+    color: #1f2937; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
