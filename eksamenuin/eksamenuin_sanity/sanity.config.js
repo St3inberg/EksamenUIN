@@ -1,11 +1,11 @@
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
-import {schemaTypes} from '/schemaTypes'
+import {schemaTypes} from './schemaTypes/schema'
 
 export default defineConfig({
   name: 'default',
-  title: 'EksamenUIN',
+  title: 'EksamenUIN_Sanity',
 
   projectId: '7sm8nni0',
   dataset: 'production',
