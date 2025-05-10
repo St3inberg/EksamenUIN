@@ -13,7 +13,6 @@ export default function Router(){
     return(
 
 <Layout
-
 >
         <Routes path="/" element={<App />}>
               <Route index element={<Home />} />
