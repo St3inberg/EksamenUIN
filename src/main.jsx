@@ -10,13 +10,9 @@ import Router from './router.jsx'
 createRoot(document.getElementById("root")).render(
   
     <BrowserRouter>
-      <Router/>
 
-      
-    
-      
+      <Router/>  
 
-      
     </BrowserRouter>
   
 
