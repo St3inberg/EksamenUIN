@@ -1,4 +1,4 @@
-
+import EventCard from "../components/cards/EventCard";
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 // const APIKEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
@@ -60,6 +60,8 @@ export default function Home() {
            
            
           <h1 className="section-title">Velkommen til Hjemside!!</h1>
+
+          {findings?.map((finding, index) => (<EventCard key={finding?.[0].id} finding={finding} />))}
             
           {findings?.map((event, index) => (
             <div key={index}>
@@ -69,13 +71,13 @@ export default function Home() {
             </div>
           ))}
 
+          {/* <img src={findings?.[0].images[6].url} alt={findings?.name} /> 
+          
+            <p>{findings?..name}</p>  */}
+\
+
          </section>
-  
 
-
-     
-        
-        
        
     );
   }

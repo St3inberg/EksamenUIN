@@ -1,7 +1,7 @@
 
 
 
-export default function EventCard () {
+export default function EventCard ({finding}) {
   
 
   
