@@ -5,66 +5,70 @@ export default function Home() {
 
 
   const [findings, setFindings] = useState()
-  const [neon, setNeon] = useState()
-  const [skeikamp, setSkeikamp] = useState()
-  const [rock, setRock] = useState()
+  // const [neon, setNeon] = useState()
+  // const [skeikamp, setSkeikamp] = useState()
+  // const [rock, setRock] = useState()
 
   
     const getFindings = async () => {
-     fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=findings&locale=*")
+     fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&id=Z698xZb_Z16v7eGkFy,%20Z698xZb_Z17q339&locale=*")
      .then((response) => response.json())
-     .then((data) => setFindings(data._embedded.events[0]))
+     .then((data) => setFindings(data._embedded.events))
      .catch((error) => console.error("Skjedde noe dritt ved fetch findings", error));
-   }
-   const getNeon = async () => {
-     fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=Neon&locale=*")
-     .then((response) => response.json())
-     .then((data) => setNeon(data._embedded.events[0]))
-     .catch((error) => console.error("Skjedde noe dritt ved fetch neon", error));
-   }
    
-   const getSkeikamp = async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=skeikampenfestivalen&locale=*")
-    .then((response) => response.json())
-    .then((data) => setSkeikamp(data._embedded.events[0]))
-    .catch((error) => console.error("Skjedde noe dritt ved fetch skeikamp", error));
-  }
+   }
+  //  const getNeon = async () => {
+  //    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=Neon&locale=*")
+  //    .then((response) => response.json())
+  //    .then((data) => setNeon(data._embedded.events[0]))
+  //    .catch((error) => console.error("Skjedde noe dritt ved fetch neon", error));
+  //  }
+   
+  //  const getSkeikamp = async () => {
+  //   fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=skeikampenfestivalen&locale=*")
+  //   .then((response) => response.json())
+  //   .then((data) => setSkeikamp(data._embedded.events[0]))
+  //   .catch((error) => console.error("Skjedde noe dritt ved fetch skeikamp", error));
+  // }
 
-  const getRock= async () => {
-    fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=tons%20of%20rock&locale=*")
-    .then((response) => response.json())
-    .then((data) => setRock(data._embedded.events[0]))
-    .catch((error) => console.error("Skjedde noe dritt ved fetch rock", error));
-  }
+  // const getRock= async () => {
+  //   fetch("https://app.ticketmaster.com/discovery/v2/events/Z698xZb_Z16vfkqIjU?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&locale=*")
+  //   .then((response) => response.json())
+  //   .then((data) => setRock(data))
+  //   .catch((error) => console.error("Skjedde noe dritt ved fetch rock", error));
+  // }
   
    
    useEffect(() => {
      getFindings()
-     getNeon()
-     getSkeikamp()
-     getRock()
+    //  getNeon()
+    //  getSkeikamp()
+    //  getRock()
      console.log("Her finner jeg findings --", findings)
-     console.log("Her finner jeg neon -- ", neon)
-     console.log("Her finner jeg Skeikamp --", skeikamp)
-     console.log("Her finner jeg Rock --", rock)
+//      console.log("Her finner jeg neon -- ", neon)
+//      console.log("Her finner jeg Skeikamp --", skeikamp)
+//      console.log("Her finner jeg Rock --", rock)
  }, [])
     
    
 
     return (
-      <div className="container">
-        <h1 className="section-title">Velkommen til Hjemside!!</h1>
-        <section>
-          {
-            // map.(){}
-          }
-          <HomeCard/>
+     
+        
+        <section className="container">
+           
+           
+          <h1 className="section-title">Velkommen til Hjemside!!</h1>
+            
+          {/* <img src={findings?.images[6].url} alt={findings?.name} /> */}
+            <p>{findings?.[0].name}</p> 
+         </section>
+  
 
-        </section>
+     
         
         
-        <p>Oppdag de feteste arrangementene innen musikk, teater og mer!</p>
-      </div>
+       
     );
   }
   
