@@ -1,20 +1,23 @@
+import React from "react";
 
 
-
-export default function EventCard ({finding}) {
-  
-
-  
-
+export default function EventCard ({id,name,image,city,country,date,clickable = true}) {
   return (
-    
-      <article className="event-card">
-              <img src={finding.images?.[6]?.url} alt={finding.name} />
-              <h2>{finding?.name}</h2>
-                 {/* <Link to={`/event/${finding?.id}`}><h2>Mer info om {finding?.name}</h2></Link> */}
-      </article>
-      
-    
+    <article
+      className="event-card"
+      style={{ cursor: clickable ? 'pointer' : 'default' }}
+    >
+      <img
+        src={image}
+        alt={name}
+        className="event-image"
+      />
+      <h2 className="event-title">{name}</h2>
+      <p className="event-location">
+        {city}, {country}
+      </p>
+      <p className="event-date">{date}</p>
+    </article>
   );
 };
 
