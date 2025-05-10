@@ -5,19 +5,14 @@ import Dashboard from './pages/DashBoard';
 import SanityEventDetails from './pages/SanityEventDetails';
 import App from './App';
 import {Route, Routes} from 'react-router-dom';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from './components/layout/Layout';
 
 export default function Router(){
-
+    
     return(
 
 <Layout
-
-
-
-
-
 
 >
         <Routes path="/" element={<App />}>
