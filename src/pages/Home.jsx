@@ -61,20 +61,9 @@ export default function Home() {
            
           <h1 className="section-title">Velkommen til Hjemside!!</h1>
 
-          {findings?.map((finding, index) => (<EventCard key={finding?.[0].id} finding={finding} />))}
+        {findings?.map((finding, index) => (<EventCard key={index} finding={finding} />))}
             
-          {findings?.map((event, index) => (
-            <div key={index}>
-              <img src={event.images?.[6]?.url} alt={event.name} />
-              <h1>{event.name}</h1>
-              <Link to={`/event/${event.id}`}><h2>Mer info om {event.name}</h2></Link>
-            </div>
-          ))}
 
-          {/* <img src={findings?.[0].images[6].url} alt={findings?.name} /> 
-          
-            <p>{findings?..name}</p>  */}
-\
 
          </section>
 
