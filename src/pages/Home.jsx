@@ -9,6 +9,7 @@ export default function Home() {
   const [neon, setNeon] = useState()
   const [skeikamp, setSkeikamp] = useState()
   const [rock, setRock] = useState()
+  const [Eventer, AlleEventer] = useState([])
 
   
     const getFindings = async () => {
@@ -51,6 +52,14 @@ export default function Home() {
  }, [])
 
  
+//  const settalleEventer = AlleEventer[]
+//   
+//  }
+
+const settalleEventer = [
+  Eventer.push()
+
+]
     
    
 
@@ -58,10 +67,10 @@ export default function Home() {
       <div className="container">
         <h1 className="section-title">Velkommen til Hjemside!!</h1>
         <section>
-          {
+          {/* {
             neon?.map((neon) => (<EventCard neon={neon} key={neon.id}/>
 
-            ))}
+            ))} */}
           
 
         </section>
