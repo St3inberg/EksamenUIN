@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export default function EventCard ({id,name,image,city,country,date,clickable = true}) {
+export default function EventCard ({name,image,city,country,date,clickable = true}) {
   return (
     <article
       className="event-card"
