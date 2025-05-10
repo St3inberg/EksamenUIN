@@ -58,7 +58,7 @@ export default function Home() {
           {
             // map.(){}
           }
-          <HomeCard/>
+          
 
         </section>
         
