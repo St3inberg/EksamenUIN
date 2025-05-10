@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
+// const APIKEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
 
 export default function Home() {
+
 
   const [findings, setFindings] = useState()
   const [neon, setNeon] = useState()
   const [skeikamp, setSkeikamp] = useState()
   const [rock, setRock] = useState()
+
+  
     const getFindings = async () => {
      fetch("https://app.ticketmaster.com/discovery/v2/events?apikey=plqRhuO50tPOhorgr6ODGoxDpMUYX6qC&keyword=findings&locale=*")
      .then((response) => response.json())
@@ -39,11 +43,11 @@ export default function Home() {
      getNeon()
      getSkeikamp()
      getRock()
-     console.log("Her finner jeg neon -- ", neon)
      console.log("Her finner jeg findings --", findings)
+     console.log("Her finner jeg neon -- ", neon)
      console.log("Her finner jeg Skeikamp --", skeikamp)
      console.log("Her finner jeg Rock --", rock)
-   }, [])
+ }, [])
     
    
 
