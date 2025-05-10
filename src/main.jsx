@@ -12,11 +12,6 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Router/>
 
-      
-    
-      
-
-      
     </BrowserRouter>
   
 

@@ -15,10 +15,6 @@ export default function Router(){
 <Layout
 
 
-
-
-
-
 >
         <Routes path="/" element={<App />}>
               <Route index element={<Home />} />
