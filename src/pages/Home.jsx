@@ -49,6 +49,8 @@ export default function Home() {
      console.log("Her finner jeg Skeikamp --", skeikamp)
      console.log("Her finner jeg Rock --", rock)
  }, [])
+
+ 
     
    
 
