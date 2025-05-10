@@ -1,4 +1,4 @@
-
+import EventCard from "../components/cards/EventCard";
 import { useEffect, useState } from "react";
 // const APIKEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
 export default function Home() {
@@ -59,14 +59,16 @@ export default function Home() {
            
            
           <h1 className="section-title">Velkommen til Hjemside!!</h1>
+
+          {findings?.map((finding, index) => (<EventCard key={finding?.[0].id} finding={finding} />))}
             
-          <img src={findings?.[0].images[6].url} alt={findings?.name} /> 
+          {/* <img src={findings?.[0].images[6].url} alt={findings?.name} /> 
           
-            <p>{findings?.[0].name}</p> 
+            <p>{findings?..name}</p>  */}
 
          </section>
   
-\
+
 
      
         
