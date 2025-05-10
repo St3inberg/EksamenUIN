@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 
@@ -7,10 +8,16 @@ export default function EventCard () {
   
 
   return (
-    
-      <div className="event-card">
-        
-      </div>
+    // 
+
+<article>
+    <image></image>
+    <h2></h2>
+    <Link></Link>
+</article>
+
+
+
     
   );
 };
