@@ -5,9 +5,9 @@ import Dashboard from './pages/DashBoard';
 import SanityEventDetails from './pages/SanityEventDetails';
 import App from './App';
 import {Route, Routes} from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+
 import Layout from './components/layout/Layout';
-import './components/styles.scss';
+
 
 export default function Router(){
     
