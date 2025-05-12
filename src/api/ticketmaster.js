@@ -5,7 +5,7 @@ if (!API_KEY) {
   throw new Error('Ticketmaster API key is not defined in environment variables.');
 }
 
-async function fetchJson(endpoint, params = {}) {
+export async function fetchJson(endpoint, params = {}) {
   const queryParams = new URLSearchParams({
     apikey: API_KEY,
     locale: '*',

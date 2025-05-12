@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { searchEvents, getEventDetailsUrl } from '../api/ticketmaster';
+import { searchEvents, getEventDetailsUrl,searchAttractions} from '../api/ticketmaster';
 import EventCard from "../components/cards/EventCard.jsx";
+
 
 
 const festivalNames = ["Findings", "Neon", "Skeikampfestivalen", "Tons of Rock"];
@@ -12,39 +13,13 @@ const majorCities = [
   { name: "Paris", id: "Paris" },
 ];
 
+
+
 export default function Home() {
-  const [festivals, setFestivals] = useState({ data: [], loading: true, error: null });
+  
   const [city, setCity] = useState({ name: null, data: [], loading: false, error: null });
-
-  useEffect(() => {
-    const fetchFestivals = async () => {
-      try {
-        const results = await Promise.all(
-          festivalNames.map((name) => searchEvents({ keyword: name, classificationName: 'Music', size: 1 }))
-        );
-
-        let events = results
-          .map((r, i) => r._embedded?.events?.[0] || (console.warn(`No event for ${festivalNames[i]}`), null))
-          .filter(Boolean);
-
-        if (events.length < 4) {
-          const extra = await searchEvents({
-            classificationName: 'Festival',
-            countryCode: 'NO',
-            size: 4 - events.length + events.length,
-          });
-          const unique = extra._embedded?.events?.filter((e) => !events.some((f) => f.id === e.id)) || [];
-          events = [...events, ...unique].slice(0, 4);
-        }
-
-        setFestivals({ data: events, loading: false, error: null });
-      } catch (err) {
-        setFestivals({ data: [], loading: false, error: err.message || 'Kunne ikke laste festivaler' });
-      }
-    };
-
-    fetchFestivals();
-  }, []);
+  
+  
 
   const handleCityClick = async (cityName) => {
     setCity({ name: cityName, data: [], loading: true, error: null });
@@ -62,35 +37,35 @@ export default function Home() {
       <p>Oppdag de feteste arrangementene innen musikk, teater og mer!</p>
 
       <section>
-        <h2 className="section-title">Utvalgte Festivaler</h2>
-        {festivals.loading && <p>Laster festivaler...</p>}
-        {festivals.error && <p className="error">Feil: {festivals.error}</p>}
-        {!festivals.loading && !festivals.error && (
-          <div className="event-grid">
-            {festivals.data.length ? (
-              festivals.data.map((event) => (
-                <Link key={event.id} to={getEventDetailsUrl(event.id)} className="event-link">
-                  <EventCard
-                    id={event.id}
-                    name={event.name}
-                    image={
-                      event.images?.find((img) => img.ratio === '16_9')?.url ||
-                      event.images?.[0]?.url ||
-                      'https://via.placeholder.com/300x169.png?text=No+Image'
-                    }
-                    city={event._embedded?.venues?.[0]?.city?.name}
-                    country={event._embedded?.venues?.[0]?.country?.name}
-                    date={event.dates?.start?.localDate}
-                    clickable={true}
-                  />
-                </Link>
-              ))
-            ) : (
-              <p>Ingen festivaler å vise.</p>
-            )}
-          </div>
-        )}
-      </section>
+      <h2 className="section-title">Utvalgte Festivaler</h2>
+      <div className="event-grid">
+        {findings.data.map((event) => {
+          const venue = event._embedded?.venues?.[0]
+          const imageSrc =
+            event.images?.find((img) => img.ratio === '16_9')?.url ||
+            event.images?.[0]?.url ||
+            'https://placehold.co/300x169'
+
+          return (
+            <Link
+              key={event.id}
+              to={getEventDetailsUrl(event.id)}
+              className="event-link"
+            >
+              <EventCard
+                id={event.id}
+                name={event.name}
+                image={imageSrc}
+                city={venue?.city?.name}
+                country={venue?.country?.name}
+                date={event.dates?.start?.localDate}
+                clickable
+              />
+            </Link>
+          )
+        })}
+      </div>
+    </section>
 
       <section>
         <h2 className="section-title">Arrangementer i Store Byer</h2>
