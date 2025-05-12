@@ -1,33 +1,126 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { searchEvents, getEventDetailsUrl,searchAttractions} from '../api/ticketmaster';
+import { searchEvents, getEventDetailsUrl } from '../api/ticketmaster';
 import EventCard from "../components/cards/EventCard.jsx";
 
+const DEFAULT_FESTIVAL_IMAGE = 'https://placehold.co/600x400/orange/white?text=Festival';
 
+const festivals = [
+  "Findings Festival",
+  "Neon Festival",
+  "Skeikampenfestivalen",
+  "Tons of Rock"
+];
 
-const festivalNames = ["Findings", "Neon", "Skeikampfestivalen", "Tons of Rock"];
 const majorCities = [
   { name: "Oslo", id: "Oslo" },
   { name: "London", id: "London" },
   { name: "Berlin", id: "Berlin" },
-  { name: "Paris", id: "Paris" },
+  { name: "Paris", id: "Paris" }
 ];
 
-
-
 export default function Home() {
-  
-  const [city, setCity] = useState({ name: null, data: [], loading: false, error: null });
-  
-  
+  const [festivalData, setFestivalData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [city, setCity] = useState({
+    name: null,
+    data: [],
+    loading: false,
+    error: null
+  });
+
+  useEffect(() => {
+    async function fetchFestivals() {
+      setIsLoading(true);
+
+      try {
+        const festivalPromises = festivals.map(async (festivalName) => {
+          const searchParams = {
+            keyword: festivalName,
+            countryCode: 'NO',
+            sort: 'date,asc',
+            size: 5
+          };
+
+          if (festivalName === "Tons of Rock") {
+            searchParams.startDateTime = "2025-06-25T00:00:00Z";
+            searchParams.endDateTime = "2025-06-30T23:59:59Z";
+          }
+
+          try {
+            const response = await searchEvents(searchParams);
+
+            if (response._embedded?.events) {
+              const events = response._embedded.events;
+              const event = festivalName === "Tons of Rock"
+                ? events.find(e => e.dates?.start?.localDate === "2025-06-25")
+                : events[0];
+
+              if (event) {
+                return {
+                  id: event.id || festivalName,
+                  name: event.name || festivalName,
+                  image: event.images?.find(img => img.ratio === '16_9')?.url
+                    || event.images?.[0]?.url
+                    || DEFAULT_FESTIVAL_IMAGE,
+                  city: event._embedded?.venues?.[0]?.city?.name || 'Oslo',
+                  country: event._embedded?.venues?.[0]?.country?.name || 'Norway',
+                  date: event.dates?.start?.localDate || 'Coming Soon'
+                };
+              }
+            }
+
+            return {
+              id: festivalName,
+              name: festivalName,
+              image: DEFAULT_FESTIVAL_IMAGE,
+              city: 'Oslo',
+              country: 'Norway',
+              date: 'Coming Soon'
+            };
+          } catch (error) {
+            console.error(`Error fetching ${festivalName}:`, error);
+            return {
+              id: festivalName,
+              name: festivalName,
+              image: DEFAULT_FESTIVAL_IMAGE,
+              city: 'Oslo',
+              country: 'Norway',
+              date: 'Coming Soon'
+            };
+          }
+        });
+
+        const festivalsData = await Promise.all(festivalPromises);
+        setFestivalData(festivalsData);
+      } catch (error) {
+        console.error('Failed to fetch festivals:', error);
+      }
+
+      setIsLoading(false);
+    }
+
+    fetchFestivals();
+  }, []);
 
   const handleCityClick = async (cityName) => {
     setCity({ name: cityName, data: [], loading: true, error: null });
+
     try {
       const data = await searchEvents({ city: cityName, size: 10 });
-      setCity({ name: cityName, data: data._embedded?.events || [], loading: false, error: null });
+      setCity({
+        name: cityName,
+        data: data._embedded?.events || [],
+        loading: false,
+        error: null
+      });
     } catch (err) {
-      setCity({ name: cityName, data: [], loading: false, error: err.message || 'Kunne ikke laste arrangementer' });
+      setCity({
+        name: cityName,
+        data: [],
+        loading: false,
+        error: err.message || 'Kunne ikke laste arrangementer'
+      });
     }
   };
 
@@ -37,35 +130,34 @@ export default function Home() {
       <p>Oppdag de feteste arrangementene innen musikk, teater og mer!</p>
 
       <section>
-      <h2 className="section-title">Utvalgte Festivaler</h2>
-      <div className="event-grid">
-        {findings.data.map((event) => {
-          const venue = event._embedded?.venues?.[0]
-          const imageSrc =
-            event.images?.find((img) => img.ratio === '16_9')?.url ||
-            event.images?.[0]?.url ||
-            'https://placehold.co/300x169'
-
-          return (
-            <Link
-              key={event.id}
-              to={getEventDetailsUrl(event.id)}
-              className="event-link"
-            >
-              <EventCard
-                id={event.id}
-                name={event.name}
-                image={imageSrc}
-                city={venue?.city?.name}
-                country={venue?.country?.name}
-                date={event.dates?.start?.localDate}
-                clickable
-              />
-            </Link>
-          )
-        })}
-      </div>
-    </section>
+        <h2 className="section-title">Utvalgte Festivaler</h2>
+        {isLoading ? (
+          <p>Laster festivaler...</p>
+        ) : (
+          <div style={{ display: 'flex', gap: '1rem', overflowX: 'auto', padding: '1rem 0' }}>
+            {festivalData.length > 0 ? (
+              festivalData.map((event) => (
+                <Link
+                  key={event.id}
+                  to={getEventDetailsUrl(event.id)}
+                  className="event-link"
+                >
+                  <EventCard
+                    name={event.name}
+                    image={event.image}
+                    city={event.city}
+                    country={event.country}
+                    date={event.date}
+                    clickable
+                  />
+                </Link>
+              ))
+            ) : (
+              <p>Ingen festivaler funnet</p>
+            )}
+          </div>
+        )}
+      </section>
 
       <section>
         <h2 className="section-title">Arrangementer i Store Byer</h2>
