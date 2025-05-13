@@ -13,7 +13,7 @@ export default function Nav() {
       <ul>
         {kategorier.map(k => (
           <li key={k.id}>
-            <Link to={`/kategori/${k.slug}`}>{k.name}</Link>
+            <Link to={`/category/${k.slug}`}>{k.name}</Link>
           </li>
         ))}
         <li><Link to="/dashboard">Logg inn</Link></li>
