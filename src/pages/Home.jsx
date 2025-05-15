@@ -63,8 +63,6 @@ export default function Home() {
 
         {findings?.map((finding, index) => (<EventCard key={index} finding={finding} />))}
             
-
-
          </section>
 
        
