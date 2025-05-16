@@ -1,0 +1,107 @@
+/* Event Card styles */
+
+// Container for event cards
+.event-cards-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 1rem;
+  padding: 1rem 0;
+  
+  /* Hide scrollbar but keep functionality */
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+  }
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--dark-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  
+  @media (min-width: 576px) {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    
+    @media (min-width: 576px) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }  }
+}
+
+.event-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  
+  @media (min-width: 576px) {
+    height: 170px;
+  }
+  
+  @media (min-width: 768px) {
+    height: 180px;
+  }
+}
+
+.event-content {
+  padding: 0.8rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  
+  @media (min-width: 576px) {
+    padding: 1rem;
+  }
+}
+
+.event-title {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  
+  @media (min-width: 576px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+  }
+}
+
+.event-location {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.event-date {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

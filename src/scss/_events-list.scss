@@ -1,0 +1,132 @@
+/* Events List styles */
+
+.events-section {
+  margin: 2rem 0;
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+  }
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  
+  @media (min-width: 768px) {
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .event-container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.events-empty {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--dark-bg);
+  border-radius: var(--border-radius);
+  font-style: italic;
+}
+
+.events-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.events-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  
+  .sort-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    select {
+      padding: 0.4rem 0.8rem;
+      border-radius: var(--border-radius);
+      background-color: var(--dark-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-color);
+    }
+  }
+}
+
+.events-pagination {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  button {
+    padding: 0.4rem 0.8rem;
+    
+    &.active {
+      background-color: var(--primary-color);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.wishlist-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    
+    &.active {
+      fill: red;
+    }
+  }
+}

@@ -1,0 +1,119 @@
+/* Venues List styles */
+
+.venues-section {
+  margin: 2rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-align: center;
+  }
+}
+
+.venues-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  overflow: visible; /* Ensure content doesn't get cut off */
+  
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+  
+  @media (min-width: 768px) {
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .venue-container {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.venue-card {
+  background-color: var(--dark-bg);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  height: 100%;
+  width: 100%; /* Ensure cards take full width of their grid cell */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.venue-image {
+  height: 180px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.venue-content {
+  padding: 1rem;
+}
+
+.venue-name {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.venue-address {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.5rem;
+}
+
+.venue-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.venues-empty {
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--dark-bg);
+  border-radius: var(--border-radius);
+  font-style: italic;
+}
+
+.venues-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--primary-color);
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.venues-map {
+  height: 300px;
+  margin-top: 2rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}

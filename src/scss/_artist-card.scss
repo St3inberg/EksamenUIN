@@ -1,0 +1,111 @@
+/* Artist Card styles */
+
+.artist-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  background-color: var(--dark-bg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  width: 100%; /* Ensure cards take full width of their grid cell */
+  
+  @media (min-width: 576px) {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+    
+    @media (min-width: 576px) {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+.artist-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  
+  @media (min-width: 576px) {
+    height: 220px;
+  }
+  
+  @media (min-width: 768px) {
+    height: 250px;
+  }
+}
+
+.artist-content {
+  padding: 0.8rem;
+  
+  @media (min-width: 576px) {
+    padding: 1rem;
+  }
+}
+
+.artist-name {
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+  
+  @media (min-width: 576px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    font-size: 1.2rem;
+  }
+}
+
+.artist-genre {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.4rem;
+  
+  @media (min-width: 576px) {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    font-size: 0.9rem;
+  }
+}
+
+.artist-social {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.8rem;
+  
+  @media (min-width: 576px) {
+    gap: 0.8rem;
+    margin-top: 0.9rem;
+  }
+  
+  @media (min-width: 768px) {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  a {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    
+    @media (min-width: 576px) {
+      font-size: 0.95rem;
+    }
+    
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+    
+    &:hover {
+      color: var(--primary-color);
+    }
+  }
+}

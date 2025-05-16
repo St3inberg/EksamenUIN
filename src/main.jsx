@@ -1,20 +1,17 @@
 import { BrowserRouter} from 'react-router-dom';
 import {createRoot} from 'react-dom/client';
-import './components/styles.scss';
-import Router from './router.jsx'
-
-
-
-
+import './scss/main.scss';
+import Router from './router.jsx';
+import { WishlistProvider } from './context/WishlistContext';
+import { AuthProvider } from './hooks/useAuth';
 
 createRoot(document.getElementById("root")).render(
-  
-    <BrowserRouter>
-
-      <Router/>  
-
-    </BrowserRouter>
-  
-
+  <BrowserRouter>
+    <WishlistProvider>
+      <AuthProvider>
+        <Router/>  
+      </AuthProvider>
+    </WishlistProvider>
+  </BrowserRouter>
 )
 
