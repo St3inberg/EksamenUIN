@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 export default function ArtistCard({ name, image, genre, social = [], attractionId, clickable = false }) {
@@ -11,8 +11,8 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
     };
 
     return (
-        <article 
-            className="artist-card" 
+        <article
+            className="artist-card"
             style={{ cursor: clickable ? 'pointer' : 'default' }}
             onClick={clickable ? handleClick : undefined}
             tabIndex={clickable ? 0 : undefined}
@@ -24,24 +24,24 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
                 }
             }}
         >
-            <img 
-                src={image || 'https://placehold.co/300x300'} 
-                alt={`Artist ${name}`} 
+            <img
+                src={image || 'https://placehold.co/300x300'}
+                alt={`Artist ${name}`}
                 className="artist-image"
                 loading="lazy"
             />
             <div className="artist-content">
                 <h3 className="artist-name">{name}</h3>
                 {genre && <p className="artist-genre">{genre}</p>}
-                
+
                 {social.length > 0 && (
                     <div className="artist-social">
                         {social.map((link, index) => (
-                            <a 
-                                key={index} 
-                                href={link.url} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
+                            <a
+                                key={index}
+                                href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 aria-label={link.name}
                                 onClick={(e) => e.stopPropagation()} // Prevent card click when clicking on social link
                             >

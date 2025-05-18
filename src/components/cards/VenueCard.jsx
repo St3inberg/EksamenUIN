@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 export default function VenueCard({ name, image, city, country, address }) {
   return (

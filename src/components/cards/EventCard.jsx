@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import WishlistButton from '../buttons/WishlistButton';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 export default function EventCard({
   eventId,

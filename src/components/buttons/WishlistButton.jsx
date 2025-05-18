@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import useWishlist from '../../hooks/useWishlist';
 
 export default function WishlistButton({ eventId }) {
@@ -11,13 +11,13 @@ export default function WishlistButton({ eventId }) {
   }, [eventId, isInWishlist]);
 
   const handleToggleWishlist = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     toggleWishlist(eventId);
     setIsWishlisted(prev => !prev);
   };
 
   return (
-    <button 
+    <button
       className={`wishlist-button ${isWishlisted ? 'active' : ''}`}
       onClick={handleToggleWishlist}
       aria-label={`${isWishlisted ? 'Remove from' : 'Add to'} wishlist`}
