@@ -26,10 +26,11 @@ export default function CategoryFilter({ onFilterChange }) {
     setFilters(resetFilters);
     onFilterChange(resetFilters);
   };
-  
-  return (
-    <div className="category-filter">
-      <div className="filters-container">
+    return (
+    <aside className="category-filter">
+      <fieldset className="filters-container">
+        <legend className="visually-hidden">Filter Events</legend>
+        
         <div className="filter-group">
           <label htmlFor="date">Date</label>
           <input
@@ -79,11 +80,12 @@ export default function CategoryFilter({ onFilterChange }) {
             id="reset"
             className="reset-button"
             onClick={handleReset}
+            type="button"
           >
             Reset Filters
           </button>
         </div>
-      </div>
-    </div>
+      </fieldset>
+    </aside>
   );
 }

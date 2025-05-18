@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import useWishlist from '../../hooks/useWishlist';
 
 export default function WishlistButton({ eventId }) {
@@ -29,6 +28,4 @@ export default function WishlistButton({ eventId }) {
   );
 }
 
-WishlistButton.propTypes = {
-  eventId: PropTypes.string.isRequired
-};
+

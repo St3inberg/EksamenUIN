@@ -69,19 +69,24 @@
       padding: 0 1.5rem;
     }
   }
-  
-  .loading-message, .error-message, .no-results {
-    padding: 1rem;
+    .loading-message, .error-message, .no-results {
+    padding: 1.5rem;
     text-align: center;
     background-color: var(--dark-bg);
     border-radius: var(--border-radius);
     margin: 1rem 0;
     width: 100%;
     max-width: 600px;
+    font-size: 1.1rem;
     
     @media (min-width: 768px) {
-      padding: 1.5rem;
+      padding: 2rem;
     }
+  }
+  
+  .no-results {
+    color: rgba(255, 255, 255, 0.7);
+    padding: 2.5rem;
   }
   
   .error-message {

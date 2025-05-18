@@ -7,11 +7,11 @@ import { AuthProvider } from './hooks/useAuth';
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-    <WishlistProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <WishlistProvider>
         <Router/>  
-      </AuthProvider>
-    </WishlistProvider>
+      </WishlistProvider>
+    </AuthProvider>
   </BrowserRouter>
 )
 

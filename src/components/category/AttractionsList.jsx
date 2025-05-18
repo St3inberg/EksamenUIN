@@ -63,13 +63,14 @@ export default function AttractionsList({ categoryName, filters }) {
 
     fetchAttractions();
   }, [categoryName, filters]);
-    if (loading) return <div>Loading attractions...</div>;
-  if (error) return <div>Error loading attractions: {error}</div>;
-    return (
-    <div className="attractions-grid">
+  if (loading) return <p className="loading-message">Loading attractions...</p>;
+  if (error) return <p className="error-message">Error loading attractions: {error}</p>;
+    
+  return (
+    <ul className="attractions-grid">
       {attractions.length > 0 ? (
         attractions.map((attraction) => (
-          <div key={attraction.id} className="artist-container">
+          <li key={attraction.id} className="artist-container">
             <ArtistCard
               attractionId={attraction.id}
               clickable={true}
@@ -88,11 +89,11 @@ export default function AttractionsList({ categoryName, filters }) {
                 })) : []
               }
             />
-          </div>
+          </li>
         ))
       ) : (
-        <p className="no-results">No attractions found for this category</p>
+        <li className="no-results">No attractions found for this category</li>
       )}
-    </div>
+    </ul>
   );
 }
