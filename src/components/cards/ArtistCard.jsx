@@ -1,8 +1,7 @@
-// Artist card component displaying artist information with image, name, genre and social links
+
 import { useNavigate } from 'react-router-dom';
 
-// Props include: name, image, genre, attractionId
-// Optional props: social (array of social media links), clickable (defaults to false)
+
 export default function ArtistCard({ 
     name, 
     image, 
