@@ -1,4 +1,3 @@
-@use 'mixins';
 /* Event Card styles */
 
 // Container for event cards
@@ -44,17 +43,12 @@
 .event-image {
   @include mixins.fixed-image;
   height: 150px;
-}
-
-// Separate media queries for event-image to avoid sass warnings
-@media (min-width: 576px) {
-  .event-image {
+  
+  @media (min-width: 576px) {
     height: 170px;
   }
-}
-
-@media (min-width: 768px) {
-  .event-image {
+  
+  @media (min-width: 768px) {
     height: 180px;
   }
 }
@@ -64,11 +58,8 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-// Separate media query for event-content
-@media (min-width: 576px) {
-  .event-content {
+  
+  @media (min-width: 576px) {
     padding: 1rem;
   }
 }
@@ -76,18 +67,13 @@
 .event-title {
   font-size: 1rem;
   margin-bottom: 0.4rem;
-}
-
-// Separate media queries for event-title
-@media (min-width: 576px) {
-  .event-title {
+  
+  @media (min-width: 576px) {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
-}
-
-@media (min-width: 768px) {
-  .event-title {
+  
+  @media (min-width: 768px) {
     font-size: 1.2rem;
   }
 }
