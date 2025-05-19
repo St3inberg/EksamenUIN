@@ -1,4 +1,4 @@
-# Logs
+
 logs
 *.log
 npm-debug.log*
@@ -16,11 +16,17 @@ dist-ssr
 
 
 
-# Editor directories and files
+
 
 !.vscode/extensions.json
 .idea
 .DS_Store
+
+
+# Markdown files (except README.md)
+*.md
+!README.md
+
 *.suo
 *.ntvs*
 *.njsproj

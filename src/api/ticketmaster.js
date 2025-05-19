@@ -5,7 +5,7 @@ if (!API_KEY) {
   throw new Error('Ticketmaster API key is not defined in environment variables.');
 }
 
-async function fetchJson(endpoint, params = {}) {
+export async function fetchJson(endpoint, params = {}) {
   const queryParams = new URLSearchParams({
     apikey: API_KEY,
     locale: '*',
@@ -43,6 +43,22 @@ export async function getEventDetails(eventId) {
   return fetchJson(`/events/${eventId}.json`);
 }
 
+export async function getAttractionDetails(attractionId) {
+  return fetchJson(`/attractions/${attractionId}.json`);
+}
+
 export function getEventDetailsUrl(eventId) {
   return `/event/${encodeURIComponent(eventId)}`;
 }
+
+export function getAttractionDetailsUrl(attractionId) {
+  return `/attraction/${encodeURIComponent(attractionId)}`;
+}
+
+
+
+
+export const formatDate = (date) => {
+  if (!date) return '';
+  return new Date(date).toISOString().split('T')[0];
+};
