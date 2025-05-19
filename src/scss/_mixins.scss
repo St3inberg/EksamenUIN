@@ -1,0 +1,307 @@
+@use "sass:meta";
+
+// Core mixins are now imported from _core-mixins.scss
+// This file extends them with project-specific variants
+
+// Layout mixin (wraps core.flex)
+@mixin flex($direction: row, $justify: flex-start, $align: center, $gap: 0) {
+  @include core.flex($direction, $justify, $align, $gap);
+}
+
+// Flex row with options for alignment
+@mixin flex-row($justify: flex-start, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap > 0 {
+    gap: $gap;
+  }
+}
+
+// Flex column with options for alignment
+@mixin flex-column($justify: flex-start, $align: center, $gap: 0) {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+  @if $gap > 0 {
+    gap: $gap;
+  }
+}
+
+// Card and component styling
+@mixin card-base {
+  position: relative;
+  border-radius: var(--border-radius, 8px);
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@mixin card {
+  @include card-base;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+@mixin badge($bg-color: var(--accent-color), $text-color: white) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $bg-color;
+  color: $text-color;
+  font-size: 0.75rem;
+  font-weight: bold;
+  height: 18px;
+  min-width: 18px;
+  border-radius: 9px;
+  padding: 0 5px;
+}
+
+
+@mixin grid($cols: auto-fill, $min-width: 250px) {
+  display: grid;
+  @if $cols == auto-fill {
+    grid-template-columns: repeat(auto-fill, minmax($min-width, 1fr));
+  } @else {
+    grid-template-columns: repeat($cols, 1fr);
+  }
+  gap: 1rem;
+}
+
+
+
+@mixin content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  width: 100%;
+  
+  // All media queries grouped together
+  @at-root {
+    @media (min-width: 576px) {
+      #{&} {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (min-width: 768px) {
+      #{&} {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      #{&} {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+}
+
+// Fixed aspect ratio images
+@mixin fixed-image {
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  width: 100%;
+  height: 180px; // Default height
+  
+  // Media query outside the main ruleset
+  @at-root {
+    @media (min-width: 768px) {
+      #{&} {
+        height: 200px;
+      }
+    }
+  }
+}
+
+@mixin grid-cell {
+  @include card-base;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Text truncation for single line
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Icon button
+@mixin icon-button($size: 30px, $color: #ff3b30) {
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: $color;
+  transition: background-color 0.2s;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+// Media breakpoints - simplified
+@mixin media($breakpoint) {
+  @if $breakpoint == tablet {
+    @media (min-width: 576px) { @content; }
+  } @else if $breakpoint == desktop {
+    @media (min-width: 768px) { @content; }
+  } @else if $breakpoint == large {
+    @media (min-width: 1200px) { @content; }
+  }
+}
+
+// Legacy breakpoints for backwards compatibility
+@mixin for-desktop-up {
+  @media (min-width: 768px) { @content; }
+}
+
+// Visually hidden (accessibility)
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Scrollable container with hidden scrollbar
+@mixin scrollable-x {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  
+  &::-webkit-scrollbar {
+    height: 6px;
+    
+    &-thumb {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 3px;
+    }
+  }
+}
+
+// Interactive hover effects with content
+@mixin hover {
+  &:not([disabled]):hover {
+    @content;
+  }
+}
+
+// Focus state with content
+@mixin focus {
+  &:focus, &:focus-visible {
+    outline: none;
+    @content;
+  }
+}
+
+// Typography
+@mixin font($size, $weight: null, $line-height: null) {
+  font-size: $size;
+  @if $weight { font-weight: $weight; }
+  @if $line-height { line-height: $line-height; }
+}
+
+// Button styles with variants
+@mixin button($variant: primary) {
+  padding: 0.6em 1.2em;
+  border-radius: var(--border-radius, 8px);
+  border: 1px solid transparent;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  
+  @if $variant == primary {
+    background: var(--primary-color, #646cff);
+    color: white;
+    &:hover { background: var(--primary-hover, #535bf2); }
+  } @else if $variant == secondary {
+    background: transparent;
+    border-color: currentColor;
+    color: var(--primary-color, #646cff);
+    &:hover { background: rgba(100, 108, 255, 0.08); }
+  } @else if $variant == text {
+    background: transparent;
+    padding: 0.4em 0.8em;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+// Direction aware properties (for RTL support)
+@mixin directional($property, $ltr-value, $rtl-value) {
+  #{$property}: $ltr-value;
+
+  [dir=rtl] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+// Multi-theme support with content block
+@mixin theme($name) {
+  .theme-#{$name} & {
+    @content;
+  }
+}
+
+// Position shorthand
+@mixin position($position, $args...) {
+  $top: nth($args, 1);
+  $right: if(length($args) > 1, nth($args, 2), $top);
+  $bottom: if(length($args) > 2, nth($args, 3), $top);
+  $left: if(length($args) > 3, nth($args, 4), $right);
+
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// Media query for specific feature
+@mixin media($features...) {
+  @media #{$features} {
+    @content;
+  }
+}
+
+// Applies styles to elements with multiple selectors
+@mixin apply-to($selectors...) {
+  @each $selector in $selectors {
+    #{$selector} & {
+      @content;
+    }
+  }
+}
+
+// Dynamic property generation with meta module
+@mixin dynamic-props($props...) {
+  @each $name, $value in meta.keywords($props) {
+    #{$name}: $value;
+  }
+}

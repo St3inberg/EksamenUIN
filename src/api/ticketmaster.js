@@ -1,3 +1,5 @@
+
+
 const BASE_URL = 'https://app.ticketmaster.com/discovery/v2';
 const API_KEY = import.meta.env.VITE_TICKETMASTER_API_KEY;
 
@@ -16,10 +18,10 @@ export async function fetchJson(endpoint, params = {}) {
 
   try {
     const response = await fetch(url);
+    
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ message: response.statusText }));
-      throw new Error(`API Error: ${response.status} ${errorData.message || response.statusText}`);
-    }
+      throw new Error(`API Error: ${response.status} ${errorData.message || response.statusText}`);    }
     return response.json();
   } catch (error) {
     console.error('Failed to fetch from Ticketmaster:', error);
@@ -54,9 +56,6 @@ export function getEventDetailsUrl(eventId) {
 export function getAttractionDetailsUrl(attractionId) {
   return `/attraction/${encodeURIComponent(attractionId)}`;
 }
-
-
-
 
 export const formatDate = (date) => {
   if (!date) return '';

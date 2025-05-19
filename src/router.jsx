@@ -16,6 +16,7 @@ export default function Router() {  return (
         <Route path="category/:slug" element={<CategoryPage />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="sanity-event/:id" element={<SanityEventDetails />} />
+        
       </Routes>
     </Layout>
   );

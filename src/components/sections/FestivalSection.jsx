@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { searchEvents } from '../../api/ticketmaster';
 import EventCard from "../cards/EventCard.jsx";
 
-const DEFAULT_FESTIVAL_IMAGE = 'https://placehold.co/600x400/orange/white?text=Festival';
+const DEFAULT_FESTIVAL_IMAGE = 'https://placehold.co/300x169/orange/white?text=Festival';
 
 const festivals = [
   "Findings Festival",
@@ -84,15 +84,14 @@ export default function FestivalSection() {
 
     fetchFestivals();
   }, []);
-
   return (
     <section className="festivals-section">
       <h2 className="section-title">Utvalgte Festivaler</h2>
       {isLoading ? (
-        <p>Laster festivaler...</p>
-      ) : (
-        <div className="festivals-grid">
-          {festivalData.length > 0 ? (            festivalData.map((event) => (
+        <p>Laster festivaler...</p>      ) : (
+        <div className="standard-grid">
+          {festivalData.length > 0 ? (
+            festivalData.map((event) => (
               <div key={event.id} className="event-container">
                 <EventCard
                   eventId={event.id}

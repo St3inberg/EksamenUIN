@@ -1,13 +1,10 @@
 import { useState, useEffect, createContext, useContext } from 'react';
 
-
 const AuthContext = createContext();
-
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
   
   useEffect(() => {
     const storedUser = localStorage.getItem('billetlyst_user');
@@ -18,29 +15,23 @@ export function AuthProvider({ children }) {
         setIsLoggedIn(true);
       } catch (error) {
         console.error("Error parsing stored user:", error);
-        
         localStorage.removeItem('billetlyst_user');
       }
     }
   }, []);
 
-  
   const login = (userData) => {
     setUser(userData);
     setIsLoggedIn(true);
-    
     localStorage.setItem('billetlyst_user', JSON.stringify(userData));
   };
 
-  
   const logout = () => {
     setUser(null);
     setIsLoggedIn(false);
-    
     localStorage.removeItem('billetlyst_user');
   };
 
-  
   const updateUser = (newUserData) => {
     setUser(prevUser => {
       const updatedUser = { ...prevUser, ...newUserData };

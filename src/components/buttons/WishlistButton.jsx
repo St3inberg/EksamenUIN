@@ -1,5 +1,5 @@
+// Toggle button for adding/removing events from the wishlist
 import { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import useWishlist from '../../hooks/useWishlist';
 
 export default function WishlistButton({ eventId }) {
@@ -11,14 +11,12 @@ export default function WishlistButton({ eventId }) {
   }, [eventId, isInWishlist]);
 
   const handleToggleWishlist = (e) => {
-    e.stopPropagation(); 
+    e.stopPropagation();
     toggleWishlist(eventId);
     setIsWishlisted(prev => !prev);
-  };
-
-  return (
+  };  return (
     <button 
-      className={`wishlist-button ${isWishlisted ? 'active' : ''}`}
+      className={`wishlist-btn ${isWishlisted ? 'active' : ''}`}
       onClick={handleToggleWishlist}
       aria-label={`${isWishlisted ? 'Remove from' : 'Add to'} wishlist`}
     >
@@ -29,6 +27,4 @@ export default function WishlistButton({ eventId }) {
   );
 }
 
-WishlistButton.propTypes = {
-  eventId: PropTypes.string.isRequired
-};
+

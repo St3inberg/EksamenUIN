@@ -92,14 +92,19 @@
 .wishlist-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.2rem;
   
   @media (min-width: 576px) {
     grid-template-columns: repeat(2, 1fr);
   }
   
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -137,6 +142,121 @@
       margin: 0;
       color: rgba(255, 255, 255, 0.7);
       font-size: 0.9rem;
+    }
+  }
+}
+
+/* Community section styling */
+.users-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+  
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.user-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 280px;
+  max-width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  @media (min-width: 576px) {
+    max-width: calc(50% - 0.5rem);
+  }
+  
+  @media (min-width: 768px) {
+    max-width: calc(33.333% - 0.667rem);
+  }
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .user-card-avatar {
+    .user-avatar, .user-avatar-placeholder {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .user-avatar-placeholder {
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+  
+  .user-card-content {
+    flex: 1;
+    
+    h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1.1rem;
+    }
+    
+    p {
+      margin: 0 0 0.7rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+    
+    .user-card-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      
+      button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: all 0.2s;
+        flex: 1;
+        text-align: center;
+        border: none;
+      }
+      
+      .user-profile-button {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-color);
+        
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+      
+      .user-add-friend-button {
+        background-color: var(--primary-color);
+        color: white;
+        
+        &:hover {
+          background-color: var(--primary-hover);
+        }
+      }
     }
   }
 }

@@ -2,6 +2,7 @@ import UserProfile from './UserProfile';
 import WishlistSection from './WishlistSection';
 import CuratedEventsSection from './CuratedEventsSection';
 import CommunitySection from './CommunitySection';
+import ActivitySection from './ActivitySection';
 
 export default function DashboardLayout({
   user,
@@ -31,6 +32,11 @@ export default function DashboardLayout({
         loading={wishlistLoading}
         error={wishlistError}
         removeFromWishlist={removeFromWishlist}
+      />
+      
+      <ActivitySection 
+        sanityUsers={sanityUsers} 
+        sanityEvents={sanityEvents} 
       />
 
       <CuratedEventsSection 

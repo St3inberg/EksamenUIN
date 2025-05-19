@@ -1,11 +1,23 @@
 import { useState } from 'react';
 
+// Icon components for filter elements
+function FilterIcon() {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+    </svg>
+  );
+}
+
 export default function CategoryFilter({ onFilterChange }) {
   const [filters, setFilters] = useState({
     date: '',
     country: '',
     city: ''
   });
+  
+  // Whether filters are currently active
+  const hasActiveFilters = filters.date || filters.country || filters.city;
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -26,10 +38,17 @@ export default function CategoryFilter({ onFilterChange }) {
     setFilters(resetFilters);
     onFilterChange(resetFilters);
   };
-  
+
   return (
-    <div className="category-filter">
-      <div className="filters-container">
+    <aside className={`category-filter ${hasActiveFilters ? 'has-active-filters' : ''}`}>
+      <div className="filter-header">
+        <span className="filter-icon"><FilterIcon /></span>
+        <span className="filter-title">Filters</span>
+      </div>
+      
+      <fieldset className="filters-container">
+        <legend className="visually-hidden">Filter Events</legend>
+        
         <div className="filter-group">
           <label htmlFor="date">Date</label>
           <input
@@ -73,17 +92,20 @@ export default function CategoryFilter({ onFilterChange }) {
           />
         </div>
         
-        <div className="filter-group">
-          <label htmlFor="reset">&nbsp;</label>
-          <button 
-            id="reset"
-            className="reset-button"
-            onClick={handleReset}
-          >
-            Reset Filters
-          </button>
-        </div>
-      </div>
-    </div>
+        {hasActiveFilters && (
+          <div className="filter-group">
+            <button 
+              id="reset"
+              className="reset-button"
+              onClick={handleReset}
+              type="button"
+              aria-label="Reset all filters"
+            >
+              Clear All
+            </button>
+          </div>
+        )}
+      </fieldset>
+    </aside>
   );
 }

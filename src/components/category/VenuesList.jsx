@@ -1,43 +1,19 @@
 import { useState, useEffect } from 'react';
 import { searchVenues } from '../../api/ticketmaster';
 import VenueCard from '../cards/VenueCard';
-
+import { getCategoryClassification } from '../../utils/categoryUtils';
 
 export default function VenuesList({ categoryName, filters = {} }) {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   useEffect(() => {
     async function fetchVenues() {
       try {
         setLoading(true);
         
-        
-        let classificationParams = {};
-        switch(categoryName.toLowerCase()) {
-          case 'music':
-            classificationParams = { 
-              classificationName: 'Music',
-              segmentId: 'KZFzniwnSyZfZ7v7nJ' 
-            };
-            break;
-          case 'sports':
-            classificationParams = { 
-              classificationName: 'Sports',
-              segmentId: 'KZFzniwnSyZfZ7v7nE' 
-            };
-            break;
-          case 'arts':
-          case 'theatre':
-            classificationParams = { 
-              classificationName: 'Arts & Theatre',
-              segmentId: 'KZFzniwnSyZfZ7v7na' 
-            };
-            break;
-          
-          default:
-            classificationParams = { segmentName: categoryName };
-        }
+        const classificationParams = getCategoryClassification(categoryName);
         
         const params = {
           ...classificationParams,
@@ -59,14 +35,14 @@ export default function VenuesList({ categoryName, filters = {} }) {
     
     fetchVenues();
   }, [categoryName, filters]);
-  
-  if (loading) return <div>Loading venues...</div>;
-  if (error) return <div>Error loading venues: {error}</div>;
-    return (
-    <div className="venues-grid">
+    if (loading) return <p className="loading-message">Loading venues...</p>;
+  if (error) return <p className="error-message">Error loading venues: {error}</p>;
+    
+  return (
+    <ul className="standard-grid">
       {venues.length > 0 ? (
         venues.map((venue) => (
-          <div key={venue.id} className="venue-container">
+          <li key={venue.id} className="venue-container">
             <VenueCard
               name={venue.name}
               image={
@@ -78,11 +54,11 @@ export default function VenuesList({ categoryName, filters = {} }) {
               country={venue.country?.name || 'Unknown'}
               address={venue.address?.line1 || ''}
             />
-          </div>
+          </li>
         ))
       ) : (
-        <p className="no-results">No venues found for this category</p>
+        <li className="no-results">No venues found for this category</li>
       )}
-    </div>
+    </ul>
   );
 }

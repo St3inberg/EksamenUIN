@@ -20,13 +20,8 @@
 }
 
 .event-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--border-radius);
-  overflow: hidden;
+  @include mixins.grid-cell;
   background-color: var(--dark-bg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
   position: relative;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   
@@ -41,13 +36,13 @@
     @media (min-width: 576px) {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }  }
+    }
+  }
 }
 
 .event-image {
-  width: 100%;
+  @include mixins.fixed-image;
   height: 150px;
-  object-fit: cover;
   
   @media (min-width: 576px) {
     height: 170px;

@@ -1,9 +1,8 @@
 @use 'base';
-
-
+@use 'mixins';
 @use 'layout';
 
-
+// Page styles
 @use 'home-page';
 @use 'event-page';
 @use 'attraction-page';
@@ -11,10 +10,11 @@
 @use 'login';
 @use 'dashboard';
 
-
+// Component styles
 @use 'event-card';
 @use 'artist-card';
 @use 'category-filter';
+@use 'category-search';
 @use 'attractions-list';
 @use 'events-list';
 @use 'venues-list';
