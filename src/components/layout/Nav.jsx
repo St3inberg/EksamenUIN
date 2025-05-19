@@ -17,7 +17,7 @@ export default function Nav() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  return (
+return (
     <div className="nav-wrapper">
       <nav className="main-nav">
         <div className="nav-logo">
