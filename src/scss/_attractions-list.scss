@@ -1,3 +1,4 @@
+@use 'mixins';
 /* Attractions List styles */
 
 .attractions-section {
@@ -15,41 +16,18 @@
 }
 
 .attractions-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
-  width: 100%;
+  @include mixins.content-grid;
   overflow: visible; /* Ensure content doesn't get cut off */
-  
-  @media (min-width: 576px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.2rem;
-  }
-  
-  @media (min-width: 768px) {
-    gap: 1.5rem;
-  }
-  
-  @media (min-width: 992px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(4, 1fr);
-  }
   
   .artist-container {
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
   }
 }
 
 .attraction-card {
+  @include mixins.grid-cell;
   background-color: var(--dark-bg);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  height: 100%;
   
   &:hover {
     transform: translateY(-5px);
@@ -57,9 +35,7 @@
 }
 
 .attraction-image {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
+  @include mixins.fixed-image;
 }
 
 .attraction-info {

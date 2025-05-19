@@ -40,27 +40,25 @@ export default function CityEventsSection() {
 
   return (
     <section className="city-events">
-      <h2 className="section-title">Arrangementer i Store Byer</h2>
-      <div className="city-buttons">
-        {majorCities.map((city) => (
+      <h2 className="section-title">Arrangementer i Store Byer</h2>      <div className="city-buttons">
+        {majorCities.map((majorCity) => (
           <button
-            key={city.id}
-            onClick={() => handleCityClick(city.name)}
-            className="city-button"
-            disabled={city.loading && city.name === city.name}
+            key={majorCity.id}
+            onClick={() => handleCityClick(majorCity.name)}
+            className={`btn ${city.name === majorCity.name ? 'btn--primary' : 'btn--secondary'}`}
+            disabled={city.loading && city.name === majorCity.name}
           >
-            {city.name}
+            {majorCity.name}
           </button>
         ))}
-      </div>
-      {city.name && (
+      </div>{city.name && (
         <>
           <h3 className="section-subtitle">I {city.name} kan du oppleve:</h3>
-          {city.loading && <p>Laster arrangementer...</p>}
-          {city.error && <p className="error">Feil: {city.error}</p>}
-          {!city.loading && !city.error && (
-            <div className="event-grid">
-              {city.data.length ? (                city.data.map((event) => (
+          {city.loading && <p className="loading-text">Laster arrangementer...</p>}
+          {city.error && <p className="error-text">Feil: {city.error}</p>}          {!city.loading && !city.error && (
+            <div className="standard-grid">
+              {city.data.length ? (
+                city.data.map((event) => (
                   <div key={event.id} className="event-container">
                     <EventCard
                       eventId={event.id}

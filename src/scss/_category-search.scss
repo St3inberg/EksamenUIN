@@ -1,0 +1,134 @@
+/* Category Search styles */
+
+.category-search {
+  width: 100%;
+  max-width: 95%;
+  margin-bottom: 1.8rem;
+  
+  @media (min-width: 768px) {
+    max-width: 90%;
+  }
+  
+  .search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    
+    @media (min-width: 768px) {
+      flex-wrap: nowrap;
+    }
+  }
+  
+  .search-input-group {
+    flex: 1;
+    position: relative;
+    min-width: 250px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 2.8rem;
+    font-size: 1.1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(100, 108, 255, 0.25);
+    }
+  }
+  
+  .search-clear-button {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 0;
+    
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+  
+  .search-button {
+    padding: 0.8rem 1.3rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    min-width: 100px;
+    
+    &:hover {
+      background-color: var(--primary-hover);
+    }
+    
+    @media (min-width: 768px) {
+      padding: 0 1.5rem;
+    }
+  }
+}
+
+/* Search results styling */
+.search-results {
+  width: 100%;
+  max-width: 95%;
+  
+  @media (min-width: 768px) {
+    max-width: 90%;
+  }
+  
+  .search-results-header {
+    margin-bottom: 1.5rem;
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .search-category {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+      
+      .category-name {
+        color: var(--primary-color);
+        font-weight: 500;
+      }
+    }
+  }
+  
+  /* Now using standard-grid with EventCard components */
+  
+  .loading-message,
+  .error-message,
+  .no-results {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}

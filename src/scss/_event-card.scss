@@ -1,3 +1,4 @@
+@use 'mixins';
 /* Event Card styles */
 
 // Container for event cards
@@ -20,13 +21,8 @@
 }
 
 .event-card {
-  display: flex;
-  flex-direction: column;
-  border-radius: var(--border-radius);
-  overflow: hidden;
+  @include mixins.grid-cell;
   background-color: var(--dark-bg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
   position: relative;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
   
@@ -41,19 +37,24 @@
     @media (min-width: 576px) {
       transform: translateY(-5px);
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }  }
+    }
+  }
 }
 
 .event-image {
-  width: 100%;
+  @include mixins.fixed-image;
   height: 150px;
-  object-fit: cover;
-  
-  @media (min-width: 576px) {
+}
+
+// Separate media queries for event-image to avoid sass warnings
+@media (min-width: 576px) {
+  .event-image {
     height: 170px;
   }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
+  .event-image {
     height: 180px;
   }
 }
@@ -63,8 +64,11 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  
-  @media (min-width: 576px) {
+}
+
+// Separate media query for event-content
+@media (min-width: 576px) {
+  .event-content {
     padding: 1rem;
   }
 }
@@ -72,13 +76,18 @@
 .event-title {
   font-size: 1rem;
   margin-bottom: 0.4rem;
-  
-  @media (min-width: 576px) {
+}
+
+// Separate media queries for event-title
+@media (min-width: 576px) {
+  .event-title {
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
-  
-  @media (min-width: 768px) {
+}
+
+@media (min-width: 768px) {
+  .event-title {
     font-size: 1.2rem;
   }
 }

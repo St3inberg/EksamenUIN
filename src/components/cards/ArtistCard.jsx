@@ -1,6 +1,16 @@
+// Artist card component displaying artist information with image, name, genre and social links
 import { useNavigate } from 'react-router-dom';
 
-export default function ArtistCard({ name, image, genre, social = [], attractionId, clickable = false }) {
+// Props include: name, image, genre, attractionId
+// Optional props: social (array of social media links), clickable (defaults to false)
+export default function ArtistCard({ 
+    name, 
+    image, 
+    genre, 
+    social = [], 
+    attractionId, 
+    clickable = false 
+}) {
     const navigate = useNavigate();
 
     const handleClick = () => {
@@ -8,7 +18,6 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
             navigate(`/attraction/${attractionId}`);
         }
     };
-
     return (
         <article 
             className="artist-card" 
@@ -21,17 +30,18 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
                     e.preventDefault();
                     handleClick();
                 }
-            }}
-        >
-            <img 
-                src={image || 'https://placehold.co/300x300'} 
-                alt={`Artist ${name}`} 
-                className="artist-image"
-                loading="lazy"
-            />            <div className="artist-content">
+            }}        >            <div className="aspect-container">
+                <img 
+                    src={image || 'https://placehold.co/300x300'} 
+                    alt={`Artist ${name}`} 
+                    className="artist-image"
+                    loading="lazy"
+                />
+            </div>
+            
+            <div className="artist-content">
                 <h3 className="artist-name">{name}</h3>
                 {genre && <p className="artist-genre">{genre}</p>}
-                
                 {social.length > 0 && (
                     <footer className="artist-social">
                         {social.map((link, index) => (
@@ -40,8 +50,8 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
                                 href={link.url} 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
-                                aria-label={link.name}
-                                onClick={(e) => e.stopPropagation()} // Prevent card click when clicking on social link
+                                aria-label={`${name}'s ${link.name} page`} // Better accessibility
+                                onClick={(e) => e.stopPropagation()} // Prevent card click when clicking link
                             >
                                 {link.name}
                             </a>
@@ -53,4 +63,3 @@ export default function ArtistCard({ name, image, genre, social = [], attraction
     );
 }
 
-// Props are passed directly without PropTypes validation

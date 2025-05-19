@@ -1,43 +1,19 @@
 import { useState, useEffect } from 'react';
 import { searchVenues } from '../../api/ticketmaster';
 import VenueCard from '../cards/VenueCard';
-
+import { getCategoryClassification } from '../../utils/categoryUtils';
 
 export default function VenuesList({ categoryName, filters = {} }) {
   const [venues, setVenues] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  
   useEffect(() => {
     async function fetchVenues() {
       try {
         setLoading(true);
         
-        
-        let classificationParams = {};
-        switch(categoryName.toLowerCase()) {
-          case 'music':
-            classificationParams = { 
-              classificationName: 'Music',
-              segmentId: 'KZFzniwnSyZfZ7v7nJ' 
-            };
-            break;
-          case 'sports':
-            classificationParams = { 
-              classificationName: 'Sports',
-              segmentId: 'KZFzniwnSyZfZ7v7nE' 
-            };
-            break;
-          case 'arts':
-          case 'theatre':
-            classificationParams = { 
-              classificationName: 'Arts & Theatre',
-              segmentId: 'KZFzniwnSyZfZ7v7na' 
-            };
-            break;
-          
-          default:
-            classificationParams = { segmentName: categoryName };
-        }
+        const classificationParams = getCategoryClassification(categoryName);
         
         const params = {
           ...classificationParams,
@@ -63,7 +39,7 @@ export default function VenuesList({ categoryName, filters = {} }) {
   if (error) return <p className="error-message">Error loading venues: {error}</p>;
     
   return (
-    <ul className="venues-grid">
+    <ul className="standard-grid">
       {venues.length > 0 ? (
         venues.map((venue) => (
           <li key={venue.id} className="venue-container">

@@ -1,12 +1,13 @@
 export default function VenueCard({ name, image, city, country, address }) {
   return (
-    <article className="venue-card">
-      <img
-        src={image}
-        alt={`Venue ${name}`}
-        className="venue-image"
-        loading="lazy"
-      />      <div className="venue-content">
+    <article className="venue-card">      <div className="aspect-container">
+        <img
+          src={image}
+          alt={`Venue ${name}`}
+          className="venue-image"
+          loading="lazy"
+        />
+      </div><div className="venue-content">
         <h3 className="venue-title">{name}</h3>
         <address className="venue-location">
           <span className="visually-hidden">Location: </span>
@@ -18,4 +19,4 @@ export default function VenueCard({ name, image, city, country, address }) {
   );
 }
 
-// Props are passed directly without PropTypes validation
+

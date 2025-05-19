@@ -7,10 +7,9 @@ export default function Nav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { wishlist } = useWishlist();
   const { isLoggedIn, logout } = useAuth();
-  
-  const categories = [
+    const categories = [
     { id: 1, name: "Music", slug: "music" },
-    { id: 2, name: "Sport", slug: "sport" },
+    { id: 2, name: "Sports", slug: "sports" },
     { id: 3, name: "Theatre", slug: "theatre" }
   ];
 

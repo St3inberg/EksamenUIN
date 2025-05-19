@@ -1,6 +1,9 @@
+// Event card component displaying event information with image, details, and optional wishlist button
 import { useNavigate } from 'react-router-dom';
 import WishlistButton from '../buttons/WishlistButton';
 
+// Props include: eventId, name, image, city, country, date
+// Optional props: clickable (defaults to true), showWishlist (defaults to true)
 export default function EventCard({
   eventId,
   name,
@@ -18,7 +21,6 @@ export default function EventCard({
       navigate(`/event/${eventId}`);
     }
   };
-
   return (
     <article
       className="event-card"
@@ -32,13 +34,14 @@ export default function EventCard({
           handleClick();
         }
       }}
-    >
-      <img
-        src={image}
-        alt={`Event poster for ${name}`}
-        className="event-image"
-        loading="lazy"
-      />
+    >      <div className="aspect-container">
+        <img
+          src={image}
+          alt={`Event poster for ${name}`}
+          className="event-image"
+          loading="lazy"
+        />
+      </div>
       {showWishlist && eventId && (
         <WishlistButton eventId={eventId} />
       )}      <div className="event-content">
@@ -56,7 +59,7 @@ export default function EventCard({
   );
 }
 
-// Props are passed directly without PropTypes validation
+
 
 
 

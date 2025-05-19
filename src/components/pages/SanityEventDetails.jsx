@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchSanityEventByTicketmasterId, fetchUsersForSanityEvent } from '../../api/sanity';
 import { getEventDetails } from '../../api/ticketmaster';
-import WishlistButton from '../buttons/WishlistButton';
+import EventHeader from '../event/EventHeader';
+import EventInfo from '../event/EventInfo';
+import UsersList from '../event/UsersList';
 
 export default function SanityEventDetails() {
   const { id } = useParams();
@@ -18,7 +20,6 @@ export default function SanityEventDetails() {
       try {
         setLoading(true);
         
-        
         const [sanityData, tmData] = await Promise.all([
           fetchSanityEventByTicketmasterId(id),
           getEventDetails(id)
@@ -26,7 +27,6 @@ export default function SanityEventDetails() {
         
         setSanityEvent(sanityData);
         setTmEvent(tmData);
-        
         
         if (sanityData?._id) {
           const users = await fetchUsersForSanityEvent(sanityData._id);
@@ -42,27 +42,49 @@ export default function SanityEventDetails() {
 
     fetchEventData();
   }, [id]);
-
-  if (loading) return <div className="loading">Loading event details...</div>;
-  if (error) return <div className="error">Error: {error}</div>;
-  if (!tmEvent && !sanityEvent) return <div className="not-found">Event not found</div>;
-
+  if (loading) return (
+    <div className="loading-container">
+      <div className="loading-spinner"></div>
+      <p className="loading-message">Loading event details...</p>
+    </div>
+  );
   
-  const eventName = sanityEvent?.name || tmEvent?.name;
+  if (error) return (
+    <div className="error-container">
+      <div className="error-icon">⚠️</div>
+      <p className="error-message">Error: {error}</p>
+      <button className="retry-button" onClick={() => window.location.reload()}>
+        Try Again
+      </button>
+    </div>
+  );
+  
+  if (!tmEvent && !sanityEvent) return (
+    <div className="not-found-container">
+      <div className="not-found-icon">🔍</div>
+      <h2>Event Not Found</h2>
+      <p>We couldn't locate the event you're looking for.</p>
+    </div>
+  );
+
+    const eventName = sanityEvent?.name || tmEvent?.name;
   const eventImage = sanityEvent?.image?.asset?.url || 
     (tmEvent?.images && (tmEvent.images.find(img => img.ratio === '16_9')?.url || tmEvent.images[0]?.url));
   const eventDescription = sanityEvent?.description || tmEvent?.info;
-  const eventDate = sanityEvent?.startDate || tmEvent?.dates?.start?.localDate;
-  const eventLocation = sanityEvent?.location || 
+  const eventDate = sanityEvent?.date ? new Date(sanityEvent.date).toLocaleDateString() : 
+    (tmEvent?.dates?.start?.localDate);
+  const eventLocation = (sanityEvent?.venueName && sanityEvent?.city) ? 
+    `${sanityEvent.venueName}, ${sanityEvent.city}, ${sanityEvent.country || ''}` : 
     (tmEvent?._embedded?.venues?.[0] && 
       `${tmEvent._embedded.venues[0].name}, ${tmEvent._embedded.venues[0].city?.name}, ${tmEvent._embedded.venues[0].country?.name}`);
-
   return (
     <div className="sanity-event-details">
-      <div className="event-header">
-        <h1>{eventName}</h1>
-        <WishlistButton eventId={id} />
-      </div>
+      <EventHeader 
+        title={eventName} 
+        eventId={id} 
+        date={eventDate} 
+        location={eventLocation?.split(',')[0]}
+      />
       
       <div className="event-content">
         <div className="event-main">
@@ -74,62 +96,18 @@ export default function SanityEventDetails() {
             />
           )}
           
-          <div className="event-info">
-            <div className="event-date-location">
-              <h2>Event Details</h2>
-              {eventDate && (
-                <p className="event-date">
-                  <strong>Date:</strong> {eventDate}
-                </p>
-              )}
-              {eventLocation && (
-                <p className="event-location">
-                  <strong>Location:</strong> {eventLocation}
-                </p>
-              )}
-            </div>
-            
-            {eventDescription && (
-              <div className="event-description">
-                <h2>Description</h2>
-                <p>{eventDescription}</p>
-              </div>
-            )}
-            
-            {sanityEvent?.ticketType && (
-              <div className="ticket-info">
-                <h2>Ticket Information</h2>
-                <p><strong>Type:</strong> {sanityEvent.ticketType}</p>
-                {sanityEvent.price && (
-                  <p><strong>Price:</strong> {sanityEvent.price} NOK</p>
-                )}
-              </div>
-            )}
-          </div>
+          <EventInfo
+            date={eventDate}
+            location={eventLocation}
+            description={eventDescription}
+            eventType={sanityEvent?.eventType}
+            priceRange={sanityEvent?.priceRange}
+            artistLineup={sanityEvent?.artistLineup}
+          />
         </div>
         
         <div className="event-sidebar">
-          {interestedUsers.length > 0 && (
-            <div className="interested-users">
-              <h2>People Interested</h2>
-              <ul className="users-list">
-                {interestedUsers.map(user => (
-                  <li key={user._id} className="user-card">
-                    {user.profileImage?.asset?.url ? (
-                      <img 
-                        src={user.profileImage.asset.url} 
-                        alt={user.name} 
-                        className="user-image"
-                      />
-                    ) : (
-                      <div className="user-image-placeholder">{user.name[0]}</div>
-                    )}
-                    <span className="user-name">{user.name}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          {interestedUsers.length > 0 && <UsersList users={interestedUsers} />}
           
           {tmEvent?.url && (
             <div className="ticketmaster-link">

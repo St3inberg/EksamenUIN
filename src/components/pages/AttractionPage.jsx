@@ -45,7 +45,7 @@ export default function AttractionPage() {
           )}
           
           <div className="attraction-info">
-            {/* Genre Information */}
+            
             <div className="attraction-genres">
               <h2>Genre</h2>
               <div className="genre-tags">
@@ -59,7 +59,7 @@ export default function AttractionPage() {
               </div>
             </div>
             
-            {/* Social Links */}
+            
             {attraction.externalLinks && (
               <div className="attraction-social">
                 <h2>Connect</h2>
@@ -79,7 +79,7 @@ export default function AttractionPage() {
               </div>
             )}
             
-            {/* Upcoming Events */}
+            
             {attraction.upcomingEvents?._total > 0 && (
               <div className="upcoming-events">
                 <h2>Upcoming Events</h2>

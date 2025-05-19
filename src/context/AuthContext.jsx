@@ -2,15 +2,12 @@
 
 import { createContext, useState, useContext, useEffect } from 'react';
 
-
 const AuthContext = createContext();
-
 
 export function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  
   useEffect(() => {
     const storedLoginStatus = localStorage.getItem('isLoggedIn');
     const storedUserData = localStorage.getItem('userData');
@@ -21,22 +18,16 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  
   const login = (userData) => {
     setIsLoggedIn(true);
     setUserData(userData);
-    
-   
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('userData', JSON.stringify(userData));
   };
 
-  
   const logout = () => {
     setIsLoggedIn(false);
     setUserData(null);
-    
-    
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('userData');
   };

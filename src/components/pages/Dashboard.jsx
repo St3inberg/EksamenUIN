@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import useWishlist from '../../hooks/useWishlist';
 import { getEventDetails } from '../../api/ticketmaster';
 import LoginForm from '../dashboard/LoginForm';
+import SanityDashboard from '../dashboard/SanityDashboard';
 import useAuth from '../../hooks/useAuth';
 
 export default function Dashboard() {
@@ -10,7 +11,7 @@ export default function Dashboard() {
   const [wishlistEvents, setWishlistEvents] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-    // Get wishlist from context
+    
   const { wishlist } = useWishlist();
   
  
@@ -37,7 +38,6 @@ export default function Dashboard() {
   if (!isLoggedIn) {
     return <LoginForm />;
   }
-
   return (
     <div className="dashboard-page">
       <div className="dashboard-header">
@@ -50,7 +50,7 @@ export default function Dashboard() {
         </button>
       </div>
 
-      {/* User Profile Section */}
+      
       <section className="dashboard-section profile-section">
         <h2>My Profile</h2>
         {userData && (
@@ -64,7 +64,7 @@ export default function Dashboard() {
         )}
       </section>
 
-      {/* User's Wishlist Section */}
+      
       <section className="dashboard-section wishlist-section">
         <h2>My Wishlist</h2>
         {loading ? (
@@ -74,13 +74,14 @@ export default function Dashboard() {
         ) : wishlistEvents.length > 0 ? (
           <div className="wishlist-grid">
             {wishlistEvents.map(event => (
-              <div key={event.id} className="wishlist-card">
-                <Link to={`/event/${event.id}`} className="wishlist-card-link">
-                  <img 
-                    src={event.images?.find(img => img.ratio === '16_9')?.url || event.images?.[0]?.url} 
-                    alt={event.name}
-                    className="wishlist-card-image"
-                  />
+              <div key={event.id} className="wishlist-card">                <Link to={`/event/${event.id}`} className="wishlist-card-link">
+                  <div className="aspect-container">
+                    <img 
+                      src={event.images?.find(img => img.ratio === '16_9')?.url || event.images?.[0]?.url} 
+                      alt={event.name}
+                      className="wishlist-card-image"
+                    />
+                  </div>
                   <div className="wishlist-card-content">
                     <h3>{event.name}</h3>
                     <p>{event.dates?.start?.localDate}</p>
@@ -92,6 +93,14 @@ export default function Dashboard() {
         ) : (
           <p>No events in your wishlist. Browse events and click the heart icon to add them here!</p>
         )}
+      </section>
+        
+      <section className="dashboard-section sanity-section">
+        <h2>Social Discovery</h2>
+        <p className="section-description">
+          Connect with friends and discover events they're attending
+        </p>
+        <SanityDashboard />
       </section>
     </div>
   );
